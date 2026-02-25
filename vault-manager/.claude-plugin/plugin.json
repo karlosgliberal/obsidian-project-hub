@@ -1,0 +1,14 @@
+{
+  "name": "vault-manager",
+  "version": "1.0.0",
+  "description": "Manage an Obsidian knowledge vault for cross-project learning, patterns, and session tracking",
+  "author": {
+    "name": "<your-github-username>"
+  },
+  "keywords": [
+    "obsidian",
+    "vault",
+    "knowledge-management",
+    "project-tracking"
+  ]
+}

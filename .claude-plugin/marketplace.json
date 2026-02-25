@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    {
+      "name": "vault-manager",
+      "description": "Manage an Obsidian knowledge vault for cross-project learning, patterns, and session tracking",
+      "version": "1.0.0",
+      "source": "./vault-manager"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# Obsidian workspace (personal state)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Plugin config (contains user-specific vault path)
+vault-manager/config/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Obsidian trash
+.trash/

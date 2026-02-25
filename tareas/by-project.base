@@ -1,0 +1,28 @@
+filters:
+  and:
+    - file.hasTag("task")
+    - file.ext == "md"
+formulas:
+  priority_label: if(priority == 0, "Critical", if(priority == 1, "High", if(priority == 2, "Medium", if(priority == 3, "Low", "Backlog"))))
+properties:
+  file.name:
+    displayName: Tarea
+  project:
+    displayName: Proyecto
+  status:
+    displayName: Estado
+  formula.priority_label:
+    displayName: Prioridad
+  type:
+    displayName: Tipo
+views:
+  - type: table
+    name: Por Proyecto
+    groupBy:
+      property: project
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - formula.priority_label
+      - type

@@ -1,0 +1,40 @@
+filters:
+  and:
+    - file.hasTag("task")
+    - file.ext == "md"
+formulas:
+  priority_label: if(priority == 0, "Critical", if(priority == 1, "High", if(priority == 2, "Medium", if(priority == 3, "Low", "Backlog"))))
+  days_open: if(created, (today() - date(created)).days, "")
+properties:
+  file.name:
+    displayName: Tarea
+  project:
+    displayName: Proyecto
+  status:
+    displayName: Estado
+  formula.priority_label:
+    displayName: Prioridad
+  type:
+    displayName: Tipo
+  formula.days_open:
+    displayName: Días abierta
+views:
+  - type: cards
+    name: Kanban
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - project
+      - formula.priority_label
+      - type
+  - type: table
+    name: Tabla
+    order:
+      - file.name
+      - project
+      - status
+      - formula.priority_label
+      - type
+      - formula.days_open
