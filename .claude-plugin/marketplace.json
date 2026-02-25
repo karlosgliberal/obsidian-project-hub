@@ -8,7 +8,7 @@
     {
       "name": "vault-manager",
       "description": "Manage an Obsidian knowledge vault for cross-project learning, patterns, and session tracking",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "source": "./vault-manager"
     }
   ]
