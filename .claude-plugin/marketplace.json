@@ -1,4 +1,9 @@
 {
+  "name": "obsidian-project-hub",
+  "owner": {
+    "name": "karlosgliberal",
+    "url": "https://github.com/karlosgliberal"
+  },
   "plugins": [
     {
       "name": "vault-manager",
