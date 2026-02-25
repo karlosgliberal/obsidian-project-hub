@@ -4,6 +4,9 @@ description: >
   Se activa cuando el usuario menciona vault, obsidian, tareas del vault, patrones,
   conocimiento, "guardar como patrón", "crear tarea en el vault", "registrar decisión",
   o cualquier referencia a la gestión de conocimiento centralizado.
+  También se activa con indicaciones de fin de sesión: "hemos terminado", "cerramos",
+  "fin de sesión", "wrap up", "ya está", "por hoy vale", "dejamos aquí",
+  "terminamos por hoy", "session end".
 ---
 
 # Vault Knowledge — Skill de gestión del vault
@@ -186,6 +189,15 @@ Las plantillas de referencia están en `${VAULT}/plantillas/`. Úsalas como guí
 - `epic.md` — Épica
 - `pattern.md` — Patrón
 - `exploration.md` — Exploración
+
+## Sync de fin de sesión
+
+Cuando el usuario indique que quiere terminar la sesión (frases como "hemos terminado",
+"cerramos", "por hoy vale", "dejamos aquí", etc.), **no solo te despidas**. Antes:
+
+1. Evalúa si hubo trabajo significativo en la sesión (¿se editaron archivos? ¿se tomaron decisiones? ¿se descubrieron patrones?)
+2. Si hubo trabajo significativo, sugiere ejecutar `/vault-manager:vault-sync` o ejecuta directamente el flujo de sync
+3. Si no hubo trabajo significativo, simplemente despídete sin ruido
 
 ## Importante
 

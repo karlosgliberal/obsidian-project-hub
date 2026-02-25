@@ -1,12 +1,12 @@
 {
   "hooks": {
-    "Stop": [
+    "PreCompact": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'if [ -f \"${CLAUDE_PROJECT_DIR}/.claude/rules/vault-sync.md\" ]; then echo \"{\\\"continue\\\": true, \\\"suppressOutput\\\": false, \\\"systemMessage\\\": \\\"Recordatorio: este proyecto está conectado al vault de conocimiento. Si hubo trabajo significativo en esta sesión, sugiere al usuario ejecutar /vault-sync antes de terminar.\\\"}\"; fi'",
-            "timeout": 5
+            "command": "bash -c 'if [ -f \"${CLAUDE_PROJECT_DIR}/.claude/rules/vault-sync.md\" ]; then echo \"{\\\"continue\\\": true, \\\"suppressOutput\\\": false, \\\"systemMessage\\\": \\\"IMPORTANTE: El contexto se va a comprimir. Antes de perder detalles de esta sesión, ejecuta vault-sync ahora: actualiza el Contexto activo en proyectos/<proyecto>.md, crea entrada en sesiones/ si hubo trabajo significativo, y captura patrones o decisiones descubiertos. Sigue el flujo de /vault-manager:vault-sync.\\\"}\"; fi'",
+            "timeout": 10
           }
         ]
       }
