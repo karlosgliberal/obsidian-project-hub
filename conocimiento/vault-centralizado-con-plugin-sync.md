@@ -1,6 +1,6 @@
 ---
 tags:
-  - pattern
+  - knowledge
 projects:
   - "[[obsidian-project-hub]]"
 status: validated
@@ -26,7 +26,8 @@ Un vault de Obsidian centralizado que actúa como base de conocimiento transvers
    - `/vault-sync` — al final de sesión, actualiza estado del proyecto, crea log de sesión, gestiona tareas
    - Skill `vault-knowledge` — se activa automáticamente cuando se menciona el vault
    - Agente `vault-analyzer` — análisis profundo del proyecto para la inicialización
-   - Stop hook — recordatorio de sync al salir de una sesión
+   - Hook PreCompact — sync automático antes de compresión de contexto
+   - Triggers de fin de sesión en el skill — detecta frases como "hemos terminado" y sugiere vault-sync
 
 ### Flujo
 

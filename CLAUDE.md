@@ -6,16 +6,11 @@ Vault centralizado de conocimiento para todos los proyectos gestionados con Clau
 
 ```
 vault/
-├── proyectos/        # Un directorio por proyecto gestionado
-├── conocimiento/     # Conocimiento transversal
-│   ├── patrones/     # Patrones reutilizables entre proyectos
-│   ├── decisiones/   # ADRs (Architecture Decision Records) globales
-│   └── aprendizajes/ # Aprendizajes de debugging, investigación, etc.
-├── tareas/           # Tareas cross-project (.md) + vistas (.base)
-│   └── epicas/       # Épicas como .md
-├── exploraciones/    # Investigaciones y research
-├── sesiones/         # Logs de sesiones de trabajo
-└── plantillas/       # Templates de Obsidian para notas nuevas
+├── proyectos/        # Un fichero por proyecto
+├── conocimiento/     # Conocimiento transversal (flat, tags para diferenciar)
+├── tareas/           # Captura rápida de ideas (.md) + vistas (.base)
+├── sesiones/         # Logs de sesiones
+└── plantillas/       # Templates: project, task, session, knowledge
 ```
 
 ## Convenciones
@@ -27,7 +22,7 @@ Toda nota debe tener frontmatter YAML con al menos:
 ```yaml
 ---
 tags:
-  - <tipo>           # task, epic, pattern, decision, session, exploration, project
+  - <tipo>           # project, task, session, knowledge
 date: YYYY-MM-DD
 status: <estado>     # depende del tipo (ver abajo)
 ---
@@ -35,13 +30,12 @@ status: <estado>     # depende del tipo (ver abajo)
 
 ### Taxonomía de tags
 
+4 tipos primarios (exactamente uno por nota):
+
 - `project` — Entrada de proyecto
-- `task` — Tarea individual
-- `epic` — Épica con subtareas
-- `pattern` — Patrón reutilizable
-- `decision` — Decisión arquitectónica (ADR)
+- `task` — Captura rápida de idea/tarea vinculada a proyecto
 - `session` — Log de sesión de trabajo
-- `exploration` — Investigación/research
+- `knowledge` — Patrones, aprendizajes, decisiones, investigaciones
 
 Tags adicionales opcionales para categorización: `claude-code`, `obsidian`, `react`, `ai`, etc.
 
@@ -49,18 +43,16 @@ Tags adicionales opcionales para categorización: `claude-code`, `obsidian`, `re
 
 | Tipo | Valores posibles |
 |------|-----------------|
-| task | `open`, `in_progress`, `done`, `blocked` |
-| epic | `open`, `in_progress`, `done` |
 | project | `active`, `paused`, `archived` |
-| exploration | `draft`, `in_progress`, `complete` |
-| pattern | `draft`, `validated` |
+| task | `open`, `done` |
+| knowledge | `draft`, `validated` |
 | session | (sin status, usa date) |
 
 ### Wikilinks
 
 Usar `[[nombre-nota]]` para vincular notas entre sí. Especialmente:
 - Tareas → Proyecto: `project: "[[nombre-proyecto]]"`
-- Patrones → Proyectos donde aplican: `projects: ["[[proyecto-1]]", "[[proyecto-2]]"]`
+- Knowledge → Proyectos donde aplica: `projects: ["[[proyecto-1]]", "[[proyecto-2]]"]`
 - Sesiones → Proyecto: `project: "[[nombre-proyecto]]"`
 
 ### Vistas .base
@@ -79,8 +71,7 @@ Los archivos `.base` son vistas dinámicas sobre las notas. No almacenan datos �
 Cuando se trabaja desde un proyecto externo que apunta a este vault:
 
 1. **Al inicio**: Leer `proyectos/<proyecto>.md` (incluye sección "Contexto activo")
-2. **Durante**: Si se descubre un patrón, crear nota en `conocimiento/patrones/`
+2. **Durante**: Si se descubre conocimiento reutilizable, crear nota en `conocimiento/`
 3. **Al final**:
    - Actualizar la sección "Contexto activo" en `proyectos/<proyecto>.md`
    - Crear entrada en `sesiones/` si la sesión fue significativa
-   - Actualizar tareas en `tareas/` si cambió su status

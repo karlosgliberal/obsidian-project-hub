@@ -13,13 +13,13 @@ Sigue estos pasos en orden:
 
 ### 1. Configuración
 
-Determina la ruta del vault:
+Determina la ruta del vault y el nombre del proyecto:
 
-1. Busca `${CLAUDE_PLUGIN_ROOT}/config/vault-path.txt`.
-2. Si existe, lee la ruta del vault desde ese archivo. Usa esa ruta como `VAULT`.
-3. Si NO existe, informa al usuario que el vault no está configurado y sugiere ejecutar `/vault-manager:vault-init` primero. Detén la ejecución.
-
-Detecta el nombre del proyecto desde el directorio actual (kebab-case).
+1. **Preferido**: Busca en el contexto actual la regla `.claude/rules/vault-sync.md` (ya cargada en sesión). Extrae:
+   - Línea `Ruta: <path>` → usa como `VAULT`
+   - Línea `[[<nombre>]]` → usa como nombre del proyecto
+2. **Fallback**: Si no hay regla en contexto, busca `${CLAUDE_PLUGIN_ROOT}/config/vault-path.txt` y usa el nombre del directorio actual como proyecto.
+3. Si ninguno existe, informa al usuario y sugiere ejecutar `/vault-manager:vault-init`. Detén la ejecución.
 
 Verifica que existe `${VAULT}/proyectos/<nombre-proyecto>.md`. Si no existe, sugiere ejecutar `/vault-manager:vault-init` primero.
 
@@ -34,8 +34,7 @@ Recopila información sobre lo que se hizo en esta sesión:
   - Qué se logró
   - Decisiones tomadas
   - Problemas encontrados y soluciones
-  - Patrones identificados
-  - Tareas nuevas surgidas
+  - Conocimiento reutilizable identificado
   - Próximos pasos
 
 ### 3. Actualizar proyecto en el vault
@@ -63,29 +62,25 @@ Rellena las secciones:
 - `## Objetivo` — qué se pretendía hacer
 - `## Qué se hizo` — resumen concreto de lo logrado
 - `## Decisiones tomadas` — decisiones relevantes con justificación
-- `## Descubrimientos` — aprendizajes, bugs, patrones identificados
+- `## Descubrimientos` — aprendizajes, conocimiento identificado
 - `## Próximos pasos` — qué queda pendiente
 
 Si ya existe una sesión para hoy y este proyecto, actualízala en lugar de crear una nueva.
 
-### 5. Gestionar tareas
+### 5. Capturar tareas (opt-in)
 
-Revisa las tareas existentes en `${VAULT}/tareas/` que estén vinculadas a este proyecto:
+Pregunta al usuario si quiere registrar ideas o tareas surgidas durante la sesión.
 
-- Si alguna tarea se **completó** en esta sesión → cambia su `status` a `done`.
-- Si alguna tarea está **en progreso** → cambia su `status` a `in_progress`.
-- Si se **identificaron tareas nuevas** → crea notas nuevas en `${VAULT}/tareas/` con el formato de la plantilla.
-- Si alguna tarea se **bloqueó** → cambia su `status` a `blocked` y documenta el motivo.
+- Si dice sí: crea notas simples en `${VAULT}/tareas/` con frontmatter mínimo (`tags: [task]`, `project`, `status: open`, `created`).
+- Si dice no: salta este paso.
+- NO busques ni modifiques tareas existentes. NO hagas transiciones automáticas de status.
 
 ### 6. Capturar conocimiento (si aplica)
 
-Si durante la sesión se identificaron:
+Si durante la sesión se identificó conocimiento reutilizable (patrones, aprendizajes, decisiones, investigaciones):
 
-- **Patrones reutilizables** → crea nota en `${VAULT}/conocimiento/patrones/` usando `${VAULT}/plantillas/pattern.md`.
-- **Decisiones arquitectónicas** → crea nota en `${VAULT}/conocimiento/decisiones/` con formato ADR.
-- **Aprendizajes de debugging** → crea nota en `${VAULT}/conocimiento/aprendizajes/`.
-
-Solo crea estas notas si hay contenido genuinamente reutilizable. No fuerces la creación.
+- Crea nota en `${VAULT}/conocimiento/` usando `${VAULT}/plantillas/knowledge.md` con tag `knowledge`.
+- Solo crea si hay contenido genuinamente reutilizable. No fuerces la creación.
 
 ### 7. Resumen
 
@@ -93,6 +88,5 @@ Muestra al usuario un resumen de todo lo actualizado:
 
 - Cambios en `proyectos/<nombre-proyecto>.md`
 - Sesión creada/actualizada
-- Tareas actualizadas (con status viejo → nuevo)
-- Tareas nuevas creadas
-- Conocimiento capturado (patrones, decisiones, aprendizajes)
+- Tareas nuevas creadas (si las hubo)
+- Conocimiento capturado (si lo hubo)

@@ -35,7 +35,6 @@ Explora los siguientes archivos y fuentes del proyecto actual, **si existen**. N
 - `ARCHITECTURE.md`, `DESIGN.md` — Documentos de diseño
 
 ### Issues y tareas
-- `.beads/issues.jsonl` — Issues de Beads
 - `TODO.md`, `ROADMAP.md` — Tareas planificadas
 - Buscar `TODO:` y `FIXME:` en el código fuente (solo contar, no listar todos)
 
@@ -73,7 +72,7 @@ Genera un informe con exactamente estas secciones:
 <En qué punto está el proyecto — qué funciona, qué falta>
 
 ## Tareas pendientes
-<Lista de tareas/issues detectados, una por línea con descripción breve>
+<Máximo 5 tareas/issues más relevantes, una por línea con descripción breve. El usuario decidirá cuáles registrar.>
 
 ## Próximos pasos
 <Qué sería lo siguiente lógico para avanzar>

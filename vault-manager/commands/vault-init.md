@@ -62,9 +62,11 @@ Con los datos del agente, crea `${VAULT}/proyectos/<nombre-proyecto>.md` siguien
 
 Usa wikilinks `[[nombre]]` para referenciar otros proyectos o notas del vault cuando sea relevante.
 
-### 6. Crear tareas si se detectaron
+### 6. Crear tareas (opt-in)
 
-Si el análisis detectó issues, TODOs, o tareas pendientes, crea una nota por tarea en `${VAULT}/tareas/<nombre-tarea>.md` usando el formato de `${VAULT}/plantillas/task.md`:
+Si el análisis detectó issues, TODOs, o tareas pendientes, **pregunta al usuario** cuáles quiere registrar (máximo 3-5).
+
+Para cada tarea aprobada, crea una nota en `${VAULT}/tareas/<nombre-tarea>.md` con frontmatter mínimo:
 
 ```yaml
 ---
@@ -72,13 +74,9 @@ tags:
   - task
 project: "[[<nombre-proyecto>]]"
 status: open
-priority: 2
-type: task
 created: <fecha-hoy>
 ---
 ```
-
-Nombra cada archivo en kebab-case descriptivo. Vincula cada tarea al proyecto con wikilink.
 
 ### 7. Crear regla de sincronización en el proyecto local
 
@@ -102,7 +100,7 @@ Ruta: ${VAULT}
 
 ## Protocolo
 - **Al inicio de sesión**: Lee `${VAULT}/proyectos/<nombre-proyecto>.md` para contexto.
-- **Durante el trabajo**: Si descubres un patrón reutilizable, créalo en `${VAULT}/conocimiento/patrones/`.
+- **Durante el trabajo**: Si descubres conocimiento reutilizable, créalo en `${VAULT}/conocimiento/`.
 - **Al final de sesión**: Ejecuta `/vault-sync` para sincronizar.
 ```
 
@@ -121,5 +119,5 @@ Muestra al usuario:
 
 - Ficheros creados en el vault (con rutas)
 - Ficheros creados en el proyecto local
-- Tareas detectadas y registradas
+- Tareas registradas (si las hubo)
 - Cómo usar `/vault-sync` al final de las sesiones
